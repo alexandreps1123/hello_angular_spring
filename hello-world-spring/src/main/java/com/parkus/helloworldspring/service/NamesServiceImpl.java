@@ -23,7 +23,7 @@ public class NamesServiceImpl implements NamesService {
     }
 
     @Override
-    public Optional<Names> findById(Long id){
+    public Optional<Names> findById(Long id) {
         return repository.findById(id);
     }
 

@@ -15,15 +15,15 @@ public class HelloWorldSpringApplication {
 		SpringApplication.run(HelloWorldSpringApplication.class, args);
 	}
 
-  	@Bean
-	CommandLineRunner initDatabase(NamesRepository namesRepository) {
-		return args -> {
-			namesRepository.deleteAll();
+  	// @Bean
+	// CommandLineRunner initDatabase(NamesRepository namesRepository) {
+	// 	return args -> {
+	// 		namesRepository.deleteAll();
 
-			Names c = new Names();
-			c.setName("Angular com Spring");
+	// 		Names c = new Names();
+	// 		c.setName("Angular com Spring");
 
-			namesRepository.save(c);
-		};
-  }
+	// 		namesRepository.save(c);
+	// 	};
+  	// }
 }

@@ -11,9 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api/names")
@@ -21,15 +23,14 @@ public class NamesController {
 
   private final NamesService namesService;
 
-
   public NamesController(NamesService namesService) {
     this.namesService = namesService;
   }
 
   @GetMapping
-  public ResponseEntity<List<Names>> listAll() {
-    
-    if(namesService.findAll().isEmpty()) {
+  public ResponseEntity<List<Names>> listAllNames() {
+
+    if (namesService.findAll().isEmpty()) {
       return ResponseEntity.notFound().build();
     }
 
@@ -38,8 +39,8 @@ public class NamesController {
 
   @GetMapping(path = "/{id}")
   public ResponseEntity<Optional<Names>> getUpperName(@PathVariable("id") Long id) {
-    
-    if(namesService.findById(id).isEmpty()) {
+
+    if (namesService.findById(id).isEmpty()) {
       return ResponseEntity.notFound().build();
     }
 
@@ -48,9 +49,14 @@ public class NamesController {
 
   @PostMapping
   @ResponseBody
-  public Names create(Names name) {
-    //TODO
-    return name;
+  public ResponseEntity<Object> createName(@RequestBody Names name) {
+
+    Names namesCreated = namesService.save(name);
+
+    var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("").build().toUri();
+
+    return ResponseEntity.created(uri).body(namesCreated);
+
   }
 
 }
