@@ -1,15 +1,10 @@
-# hello_world ignore
-hello_world/package-lock.json
+*/package-lock.json
 
-hello_world/.angular/
+*/.angular/
 
 # node output dir
-hello_world/node_modules/
+*/node_modules/
 
-*.vscode/*
-*.code-workspace
-
-# hello-world-spring
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -43,3 +38,4 @@ target/
 
 ### VS Code ###
 *.vscode/
+*.code-workspace
