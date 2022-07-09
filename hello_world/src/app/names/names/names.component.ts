@@ -12,13 +12,14 @@ import { NamesService } from '../services/names.service';
 export class NamesComponent implements OnInit {
 
   names$: Observable<Names[]>;
-  displayedColumns = ['name'];
 
-  //namesService: NamesService;
+  name = '';
+
+  displayedColumns = ['name'];
 
   constructor(private namesService: NamesService) {
     //this.namesService = new NamesService();
-    this.names$ = this.namesService.list()
+    this.names$ = this.namesService.getAllNames()
     .pipe(
       catchError(error => {
         console.log(error);
@@ -27,7 +28,16 @@ export class NamesComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
+
+  ngOnInit(): void {  }
+
+  onUpdateName(event : any) {
+    this.name = (<HTMLInputElement>event.target).value;
+  }
+
+  saveName() {
+
+    this.namesService.saveName(this.name);
   }
 
 }
