@@ -8,29 +8,37 @@ import javax.persistence.Id;
 
 
 @Entity
-public class Names {
+public class Name {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
   @Column(nullable = false)
-  private String name;
+  private String fullName;
 
-  public Names() {
-    // constructor
+  public Name() { }
+
+  public Name(String fullName) {
+    this.fullName = fullName;
   }
-
+  
   public Long getId() {
     return id;
   }
 
-  public String getName() {
-    return name;
+  public String getFullName() {
+    return fullName;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
   }
 
+  @Override
+  public String toString() {
+    return "Name [fullName=" + fullName + ", id=" + id + "]";
+  }
+
+  
 }

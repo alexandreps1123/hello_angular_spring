@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, tap } from 'rxjs';
+import { delay, tap, Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 import { Names } from '../model/names';
 
@@ -13,11 +14,16 @@ export class NamesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  list() {
-    return this.httpClient.get<Names[]>(this.API)
-    .pipe(
-      //delay(5000),
-      tap(names => console.log(names))
-    );
+  getAllNames(): Observable<Names[]> {
+    return this.httpClient.get<Names[]>(this.API);
   }
+
+  getUpperNames(id: number): Observable<Names> {
+    return this.httpClient.get<Names>(`${this.API}/${id}`);
+  }
+
+  saveName(data: any): Observable<any> {
+    return this.httpClient.post(this.API, data);
+  }
+
 }

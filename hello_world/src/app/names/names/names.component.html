@@ -2,10 +2,16 @@
   <form class="form">
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Nome</mat-label>
-      <input matInput placeholder="Insira seu nome" value="">
+      <input
+        type="text"
+        matInput
+        placeholder="Insira seu nome"
+        (input)="onUpdateName($event)"
+      />
+      <p>{{ name }}</p>
     </mat-form-field>
     <div class="button-ok">
-      <button mat-raised-button color="primary">OK</button>
+      <button (click)="saveName()" color="primary">OK</button>
     </div>
   </form>
 </mat-card>
@@ -15,20 +21,18 @@
 </mat-card>
 
 <mat-card>
-  <div *ngIf="names$ |  async as names ; else loading">
+  <div *ngIf="names$ | async as names; else loading">
     <table mat-table [dataSource]="names" class="mat-elevation-z8">
-
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Nome </th>
-        <td mat-cell *matCellDef="let names"> {{ names.name }} </td>
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let names">{{ names.name }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
-
 
   <ng-template #loading>
     <div class="loading-spinner">

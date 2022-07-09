@@ -1,11 +1,11 @@
 package com.parkus.helloworldspring.repository;
 
-import com.parkus.helloworldspring.model.Names;
+import com.parkus.helloworldspring.model.Name;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NamesRepository extends JpaRepository<Names, Long>{
+public interface NameRepository extends JpaRepository<Name, Long>{
 
 }
